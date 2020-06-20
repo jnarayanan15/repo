@@ -4,7 +4,13 @@
         <componentInstances>
             <componentName>home:heroChart</componentName>
         </componentInstances>
-        <mode>Replace</mode>
+        <componentInstances>
+            <componentInstanceProperties>
+                <name>displayAllItems</name>
+                <value>true</value>
+            </componentInstanceProperties>
+            <componentName>salesforceIdentity:appLauncherDesktop</componentName>
+        </componentInstances>
         <name>top</name>
         <type>Region</type>
     </flexiPageRegions>
@@ -15,48 +21,20 @@
         <componentInstances>
             <componentName>home:recentRecordContainer</componentName>
         </componentInstances>
-        <mode>Replace</mode>
-        <name>bottomLeft</name>
+        <name>left</name>
         <type>Region</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <componentInstances>
-            <componentName>runtime_sales_activities:todayTaskContainer</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentName>home:topDealsContainer</componentName>
-        </componentInstances>
-        <mode>Replace</mode>
-        <name>bottomRight</name>
+        <name>middle</name>
         <type>Region</type>
     </flexiPageRegions>
     <flexiPageRegions>
-        <componentInstances>
-            <componentName>home:assistant</componentName>
-        </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>flowArguments</name>
-                <value>[]</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>flowLayout</name>
-                <value>oneColumn</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>flowName</name>
-                <value>Manage_Tactical_Priorities</value>
-            </componentInstanceProperties>
-            <componentName>flowruntime:interview</componentName>
-        </componentInstances>
-        <mode>Replace</mode>
-        <name>sidebar</name>
+        <name>right</name>
         <type>Region</type>
     </flexiPageRegions>
     <masterLabel>Home Page Default</masterLabel>
-    <parentFlexiPage>home__desktopDefault</parentFlexiPage>
     <template>
-        <name>home:desktopTemplate</name>
+        <name>home:desktopTemplateHeaderThreeColumns</name>
     </template>
     <type>HomePage</type>
 </FlexiPage>

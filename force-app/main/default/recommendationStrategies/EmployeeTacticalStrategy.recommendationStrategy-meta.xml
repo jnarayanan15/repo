@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecommendationStrategy xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contextRecordType>User</contextRecordType>
+    <filter>
+        <childNode>Mark_Duplicates</childNode>
+        <label>Filter Out Duplicates</label>
+        <name>Filter_Out_Duplicates</name>
+        <expression>DuplicateText__c != &apos;true&apos;</expression>
+    </filter>
+    <invocableAction>
+        <childNode>Sort_By_Priority</childNode>
+        <label>Mark Duplicates</label>
+        <name>Mark_Duplicates</name>
+        <action>MarkDuplicates</action>
+        <isGenerator>false</isGenerator>
+        <type>apex</type>
+    </invocableAction>
+    <invocableAction>
+        <label>Load Priority Messages</label>
+        <name>Load_Priority_Messages</name>
+        <action>GenerateEmployeeTacticalPriorities</action>
+        <argument>
+            <name>salesTacticalPlanName</name>
+            <value>&apos;EmployeeDailyTacticalPlan&apos;</value>
+        </argument>
+        <argument>
+            <name>tacticName</name>
+            <value>&apos;Priority Messages&apos;</value>
+        </argument>
+        <argument>
+            <name>planType</name>
+            <value>&apos;Team&apos;</value>
+        </argument>
+        <argument>
+            <name>maxResults</name>
+            <value>5</value>
+        </argument>
+        <argument>
+            <name>userId</name>
+            <value>$Record.Id</value>
+        </argument>
+        <isGenerator>true</isGenerator>
+        <type>apex</type>
+    </invocableAction>
+    <invocableAction>
+        <label>Load Contact Risk Information</label>
+        <name>Load_Contact_Risk_Information</name>
+        <action>GenerateEmployeeTacticalPriorities</action>
+        <argument>
+            <name>salesTacticalPlanName</name>
+            <value>&apos;EmployeeDailyTacticalPlan&apos;</value>
+        </argument>
+        <argument>
+            <name>tacticName</name>
+            <value>&apos;Contact Risk&apos;</value>
+        </argument>
+        <argument>
+            <name>planType</name>
+            <value>&apos;Team&apos;</value>
+        </argument>
+        <argument>
+            <name>maxResults</name>
+            <value>5</value>
+        </argument>
+        <argument>
+            <name>userId</name>
+            <value>$Record.Id</value>
+        </argument>
+        <isGenerator>true</isGenerator>
+        <type>apex</type>
+    </invocableAction>
+    <invocableAction>
+        <label>Load Einstein HiPo Likelihood Recommendations</label>
+        <name>Update_Details</name>
+        <action>GenerateEmployeeTacticalPriorities</action>
+        <argument>
+            <name>salesTacticalPlanName</name>
+            <value>&apos;EmployeeDailyTacticalPlan&apos;</value>
+        </argument>
+        <argument>
+            <name>tacticName</name>
+            <value>&apos;Einstein HiPo Likelihood&apos;</value>
+        </argument>
+        <argument>
+            <name>planType</name>
+            <value>&apos;Team&apos;</value>
+        </argument>
+        <argument>
+            <name>maxResults</name>
+            <value>2</value>
+        </argument>
+        <argument>
+            <name>userId</name>
+            <value>$Record.Id</value>
+        </argument>
+        <isGenerator>true</isGenerator>
+        <type>apex</type>
+    </invocableAction>
+    <invocableAction>
+        <label>Load Shift Dates</label>
+        <name>Load_Shift_Dates</name>
+        <action>GenerateEmployeeTacticalPriorities</action>
+        <argument>
+            <name>salesTacticalPlanName</name>
+            <value>&apos;EmployeeDailyTacticalPlan&apos;</value>
+        </argument>
+        <argument>
+            <name>tacticName</name>
+            <value>&apos;Covid Shift Dates&apos;</value>
+        </argument>
+        <argument>
+            <name>planType</name>
+            <value>&apos;Team&apos;</value>
+        </argument>
+        <argument>
+            <name>maxResults</name>
+            <value>5</value>
+        </argument>
+        <argument>
+            <name>userId</name>
+            <value>$Record.Id</value>
+        </argument>
+        <isGenerator>true</isGenerator>
+        <type>apex</type>
+    </invocableAction>
+    <label>EmployeeTacticalStrategy</label>
+    <map>
+        <childNode>Filter_Out_Duplicates</childNode>
+        <label>Map Context</label>
+        <name>Map_Context</name>
+        <mapExpression>
+            <expression>ContextId__c</expression>
+            <name>contextRecordId</name>
+            <type>Text</type>
+        </mapExpression>
+    </map>
+    <sort>
+        <childNode>Load_Priority_Messages</childNode>
+        <childNode>Load_Contact_Risk_Information</childNode>
+        <childNode>Update_Details</childNode>
+        <childNode>Load_Shift_Dates</childNode>
+        <label>Sort By Priority</label>
+        <name>Sort_By_Priority</name>
+        <field>
+            <name>Tactical_Priority__c</name>
+            <nullsFirst>false</nullsFirst>
+            <order>Asc</order>
+        </field>
+    </sort>
+    <union>
+        <childNode>Map_Context</childNode>
+        <label>Output</label>
+        <name>Output_29e78549675c4dd6883926e0354ba201</name>
+    </union>
+</RecommendationStrategy>

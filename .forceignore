@@ -4,7 +4,7 @@
 force-app/main/default/profiles/
 package.xml
 mdapi
-
+#force-app/main/default/appMenus/
 # LWC configuration files
 **/jsconfig.json
 **/.eslintrc.json

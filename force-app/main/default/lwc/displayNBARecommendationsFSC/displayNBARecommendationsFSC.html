@@ -1,6 +1,11 @@
 <template>
     <div>
         <div class="container">
+            <div class="slds-col_bump-right slds-align-middle">
+                <div class="slds-align_absolute-center">
+                    <p style= "font-size:15px ;color:darkblue"> <strong> Einstein Next Best Action Recommendations</strong></p>
+                  </div>
+            </div>
             <div if:true={errorMessage} class="slds-p-around--small slds-text-color_destructive">
                 {errorMessage}
             </div>
@@ -8,7 +13,7 @@
                 <div class="slds-box--border slds-m-top--xxx-small slds-grid" key={rec.Id}>
                     <div class="slds-col slds-p-around--xx-small">
                         <div if:true={displayTitle} title={rec.title}>
-                            {rec.displayText}
+                        <p style="color: darkblue;"> <strong> {rec.displayText}</strong></p>
                         </div>
                         <div if:true={displayDescription} class="slds-text-body_small">
                             {rec.description}

@@ -18,10 +18,12 @@ export default class DisplayNBARecommendationsFSC extends LightningElement {
     @track reactedOnce = false;
     @track filteredRecs = [];
 
+
     labels = {
         noTitleDescription: 'Neither "title" nor "description" field is selected',
         noRecommendationsFound: 'We could not find any recommendations for you',
         reactedToAll: 'You have reacted to all recommendations',
+        errorReactedToAll:'No New recommendations ! You have reacted to all recommendations!',
         previous: 'Previous',
         next: 'Next',
         page: 'Page',
@@ -98,8 +100,12 @@ export default class DisplayNBARecommendationsFSC extends LightningElement {
     }
 
     get errorMessage() {
+       // alert(this.filteredRecs);
+       // alert(this.filteredRecs.length);
         if (!this.filteredRecs || this.filteredRecs.length === 0) {
-            return this.reactedOnce ? this.labels.reactedToAll : this.labels.noRecommendationsFound;
+         //   return this.reactedOnce ? this.labels.reactedToAll : this.labels.noRecommendationsFound;
+            return this.reactedOnce ? this.labels.errorReactedToAll : this.labels.noRecommendationsFound;
+
         } else if (!this.displayDescription && !this.displayTitle) {
             return this.labels.noTitleDescription;
         }

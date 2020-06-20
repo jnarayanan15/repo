@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Used in NBA</description>
+    <interviewLabel>Contact Risk {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Contact Risk</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <screens>
+        <description>Contact Risk Alert!</description>
+        <name>console1</name>
+        <label>Contact Risk Alert!</label>
+        <locationX>168</locationX>
+        <locationY>49</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>contextRecorddisp</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;font-size: 22px;&quot;&gt;Message from CareForce&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Work.com indicates that you have recently come in contact with someone who has tested positive for COVID. Please access the report form &lt;a href=&quot;https://corpsecurity.force.com/css/s/covid19&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt; to give more details.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Trust is our #1 Value. All reports are confidential &lt;/b&gt;and will only be used by limited members of Global Safety &amp;amp; Security and Employee Success. For questions you do not wish to answer, please write &apos;N/A&apos;. There is no retaliation for reporting your illness. If your injury is life-threatening or requires immediate action, please contact emergency services prior to completing this form.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>console1</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>ContextId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>contextRecordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>opportunityId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>userId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

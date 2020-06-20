@@ -1,4 +1,4 @@
-public with sharing class GenerateSalesTacticalPriorities {
+public with sharing class GenerateEmployeeTacticalPriorities {
 
 
     @InvocableMethod
@@ -9,38 +9,31 @@ public with sharing class GenerateSalesTacticalPriorities {
         String tacticName = requests[0].tacticName;
         String planType = requests[0].planType;
         List<Recommendation> recs = new List<Recommendation>(); 
-        System.debug('entering Generate Sales TacticalPriorities');
+        System.debug('entering Generate Employee TacticalPriorities');
         System.debug('cur values are: ' +tacticName + ' ' + maxResults + ' ' + userId);
         //1) read in the SalesPriorityPlan
         //2) Find all opportunities where the criteria type’s value exceeds the threshold
         //3) Generate recommendations  (unless the value of the criteria is 0) and set the TacticalPriority
-
-        SalesTacticalPlan__c curSalesTacticalPlan = [select name, Id,Sector_Name__c, Tactical_Ordering__c, Plan_Type__c	 from SalesTacticalPlan__c where name = :salesTacticalPlanName];
+       
+        SalesTacticalPlan__c curSalesTacticalPlan = [select name, Id,Sector_Name__c, Tactical_Ordering__c, Plan_Type__c   from SalesTacticalPlan__c where name = :salesTacticalPlanName];
         System.debug('returned tactical plan is: ' + curSalesTacticalPlan);
         List<Opportunity> relevantOpportunities = new List<Opportunity>();
         List<Policy__c> relevantPolicies = new List<Policy__c>();
         List<SObject> relevantRecords = new List<SObject>();
 
         switch on planType {
-            when 'OpportunitySelling' {
-                //relevantOpportunities = ProcessPolicyTactics.Process(relevantOpportunities, tacticName, curSalesTacticalPlan, maxResults);
-                //recs = ProcessPolicyTactics.GenerateRecommendations(relevantOpportunities, tacticName,  curSalesTacticalPlan);
+        
+            when 'Team' {
+                System.debug('in newly created Team tactic');
+                relevantRecords = ProcessEmployeeTactics.Process(tacticName, curSalesTacticalPlan, maxResults,userId);
+                recs = ProcessEmployeeTactics.GenerateRecommendations(relevantRecords, tacticName,  curSalesTacticalPlan);
             }
-            when 'InsurancePolicies' {
-                relevantPolicies = ProcessPolicyTactics.Process(tacticName, curSalesTacticalPlan, maxResults);
-                recs = ProcessPolicyTactics.GenerateRecommendations(relevantPolicies, tacticName,  curSalesTacticalPlan);
-            }
-            /*when 'Service' {
-                relevantRecords = ProcessServiceTactics.Process(tacticName, curSalesTacticalPlan, maxResults);
-                recs = ProcessServiceTactics.GenerateRecommendations(relevantRecords, tacticName,  curSalesTacticalPlan);
-            }*/
             when else {
                 System.debug('unsupported value was passed in as planType');
                 throw new InvocableActionException ('unsupported value was passed in as planType');
                 }
         }
         
-        System.debug('relevantOpportunities are: ' + relevantOpportunities);
 
               //Create a Results object to hold the return values
         List<List<Recommendation>> response = new List<List<Recommendation>>();
@@ -83,7 +76,7 @@ public with sharing class GenerateSalesTacticalPriorities {
         public Integer maxResults;
 
         @InvocableVariable
-        public String planType;	
+        public String planType;  
 
     }
 
@@ -98,4 +91,3 @@ public with sharing class GenerateSalesTacticalPriorities {
 
 
 }
-
