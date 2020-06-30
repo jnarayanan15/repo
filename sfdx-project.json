@@ -2,7 +2,7 @@
     "packageDirectories": [
         {
             "path": "force-app",
-            "package": "GoodMorning",
+            "package": "employeeappnba",
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT",
             "default": true
@@ -13,6 +13,9 @@
     "sourceApiVersion": "47.0",
     "packageAliases": {
         "GoodMorning": "0Hof4000000XZJ9CAO",
-        "GoodMorning@0.1.0-1": "04tf4000004PslgAAC"
+        "GoodMorning@0.1.0-1": "04tf4000004PslgAAC",
+        "employeeappnba": "0Ho6g000000k9dYCAQ",
+        "employeeappnba@0.1.0-3": "04t6g000008fXNIAA2",
+        "employeeappnba@1.2.0-0": "04t6g000008fXNNAA2"
     }
 }

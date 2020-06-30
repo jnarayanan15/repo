@@ -12,10 +12,11 @@ public with sharing class ProcessEmployeeTactics { public static List<SObject> P
             if (curTacticalPlan.Tactical_Ordering__c.split(',').contains('Priority Messages')) {
                 
                 System.debug('Priority Messages is a chosen tactic');
-                relevantRecords = [select Body__c, Name,Id, FlowName__c from Message__c WHERE Status__c = 'Active' and Category__c='General' LIMIT :maxResults];
+                
+                relevantRecords = [select Name,Description,Id, ActionReference from Recommendation WHERE Name like 'Priority%'];
                 System.debug('Relevant Records: ' + relevantRecords);
                 for(SObject curItem : relevantRecords){
-                    curItem.put('Description__c',curItem.get('Body__c'));
+                    curItem.put('Description',curItem.get('Description'));
                     if(curItem.get('Name')=='Priority Message: Well Being Survey')
                     { if(!userRecord[0].Survey_Taken__c){
                         System.debug('in condition survey taken');
@@ -37,10 +38,10 @@ public with sharing class ProcessEmployeeTactics { public static List<SObject> P
             if (curTacticalPlan.Tactical_Ordering__c.split(',').contains('Contact Risk')) {
                if(userRecord[0].name== 'Mae Jemison') { //simulating one user hard coded here for illustration
                 System.debug('Contact Risk is a chosen tactic');
-                relevantRecords = [select Body__c, Name,Id, FlowName__c from Message__c WHERE Status__c = 'Active' and Category__c='Contact Risk' LIMIT :maxResults];
+                relevantRecords = [select Name,Description,Id, ActionReference from Recommendation WHERE Name like '%risk%'];
                 System.debug('Relevant Records: ' + relevantRecords);
                 for(SObject curItem : relevantRecords){
-                    curItem.put('Description__c',curItem.get('Body__c'));
+                    curItem.put('Description',curItem.get('Description'));
                     recommendationRecords.add(curItem);
 
                 }
@@ -54,12 +55,12 @@ public with sharing class ProcessEmployeeTactics { public static List<SObject> P
                 System.debug('Your next Shift start date is '+ userRecord[0].Next_Shift_Start_Date__c);
 
                 
-                relevantRecords = [select Body__c, Name,Id, FlowName__c from Message__c WHERE Status__c = 'Active' and Category__c='Covid_shift' LIMIT :maxResults];
+                relevantRecords = [select Name,Description,Id, ActionReference from Recommendation WHERE Name like '%shift%'];
                
                String startDate= ProcessEmployeeTactics.formatDate(userRecord[0].Next_Shift_Start_Date__c);
                String endDate= ProcessEmployeeTactics.formatDate(userRecord[0].Next_Shift_End_Date__c);
                 //relevantRecords[0].put('Body__c','Your next Shift start date is '+ userRecord[0].Next_Shift_Start_Date__c + 'and end date is '+userRecord[0].Next_Shift_End_Date__c);
-                relevantRecords[0].put('Body__c','Please note that your next Shift start date is '+ startDate + ' and end date is '+endDate);
+                relevantRecords[0].put('Description','Please note that your next Shift start date is '+ startDate + ' and end date is '+endDate);
                 recommendationRecords.add( relevantRecords[0]);
             }
         }
@@ -68,7 +69,7 @@ public with sharing class ProcessEmployeeTactics { public static List<SObject> P
             if (curTacticalPlan.Tactical_Ordering__c.split(',').contains('Einstein HiPo Likelihood')) {
                 
                 System.debug('Einstein HiPo Likelihood is the chosen tactic');
-                relevantRecords = [select Body__c, Name,Id, FlowName__c from Message__c WHERE Status__c = 'Active' and Category__c='HiPo' LIMIT :maxResults];
+                relevantRecords = [select Name,Id,Description, ActionReference from Recommendation WHERE Name like 'training%'];
                 system.debug('hipo relevantRecords'+relevantRecords);
                 if(userRecord[0].Einstein_HiPo_Likelihood__c >80.00)
                 {
@@ -98,14 +99,14 @@ public static List<Recommendation> GenerateRecommendations (List<SObject> releva
     if (relevantRecords != null) {
         for (SObject curItem : relevantRecords) {
         
-            if (curItem.getSObjectType().getDescribe().getName() == 'Message__c'  ) {
+            if (curItem.getSObjectType().getDescribe().getName() == 'Recommendation') {
                
               
-                    curDescription = (String)curItem.get('Body__c');
+                    curDescription = (String)curItem.get('Description');
                     curName=(String)curItem.get('Name');
 
-                if ((String)curItem.get('FlowName__c') != null ) {
-                    curActionRef = (String)curItem.get('FlowName__c');
+                if ((String)curItem.get('ActionReference') != null ) {
+                    curActionRef = (String)curItem.get('ActionReference');
                 }
                 else {
                     curActionRef = 'TacticalFollowup';

@@ -7,6 +7,8 @@
 .localdevserver/
 force-app/main/default/profiles
 **mdapi
+mdapioutput/
+metadataPackage*
 
 # Logs
 logs
